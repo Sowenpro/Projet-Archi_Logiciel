@@ -15,7 +15,8 @@ public class ServeurEmpruntRendu implements Runnable {
 			System.err.println("Lancement du serveur au port " + this.listen_socket.getLocalPort());
 			while (true)
 				new Thread(new ServiceEmpruntRendu(listen_socket.accept())).start();
-		} catch (IOException e) {
+		} 
+		catch (IOException e) {
 			try {
 				this.listen_socket.close();
 			} 
@@ -29,7 +30,8 @@ public class ServeurEmpruntRendu implements Runnable {
 	protected void finalize() throws Throwable {
 		try {
 			this.listen_socket.close();
-		} catch (IOException e1) {
+		} 
+		catch (IOException e1) {
 		}
 	}
 }

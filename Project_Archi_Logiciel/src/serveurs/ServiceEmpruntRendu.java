@@ -1,7 +1,6 @@
 package serveurs;
 
 import java.net.Socket;
-import java.util.Scanner;
 
 public class ServiceEmpruntRendu implements Runnable {
 

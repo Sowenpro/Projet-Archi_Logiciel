@@ -6,8 +6,8 @@ import java.net.*;
 public class ServeurEmpruntRendu implements Runnable {
 	private ServerSocket listen_socket;
 
-	public ServeurEmpruntRendu(int port) throws IOException {
-		listen_socket = new ServerSocket(port);
+	public ServeurEmpruntRendu(int PORT) throws IOException {
+		listen_socket = new ServerSocket(PORT);
 	}
 
 	public void run() {

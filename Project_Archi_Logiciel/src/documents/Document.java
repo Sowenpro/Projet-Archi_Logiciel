@@ -9,6 +9,7 @@ public interface Document {
 	Abonne emprunteur(); // Abonné qui a emprunté ce document
 
 	Abonne reserveur(); // Abonné qui a réservé ce document
+	
 // precondition : ni réservé ni emprunté
 
 	void reservationPour(Abonne ab);

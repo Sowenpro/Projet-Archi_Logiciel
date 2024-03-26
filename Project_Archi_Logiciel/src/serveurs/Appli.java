@@ -2,7 +2,6 @@ package serveurs;
 
 import java.sql.*;
 import java.util.Scanner;
-
 import abonnes.Abonne;
 import documents.Document;
 
@@ -26,16 +25,13 @@ public class Appli {
 				System.out.print( "Veuillez saisir le numero du document: " );
 				String tempString2 = sc.nextLine();
 				sc.close();
-				Statement req1 = conn.createStatement();
-				String aString = "SELECT * FROM document WHERE numero="+tempString2+";";
-				ResultSet rs =  req1.executeQuery(aString);
-				//Document.emprunterPar();
+				//Document.emprunterPar(tempString1,tempString2);
 			}
 			else if (reponse=="retourner") {
 				System.out.print( "Veuillez saisir le numero du document: " );
 				String tempString = sc.nextLine();
 				sc.close();
-				//Document.retour();
+				//Document.retour(tempString);
 			}
 		}
 		else if (PORT==3000) {
@@ -44,7 +40,7 @@ public class Appli {
 			System.out.println("Quel document voulez-vous retourner ?");
 			String tempString2 = sc.next();
 			sc.close();
-			//Document.reservationPour();
+			//Document.reservationPour(tempString1,tempString2);
 		}
 	}
 }

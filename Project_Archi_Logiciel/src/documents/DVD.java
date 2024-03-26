@@ -2,42 +2,47 @@ package documents;
 
 import abonnes.Abonne;
 
-public class DVD implements Document {
+public class DVD extends AbstracDocument {
+	private boolean estAdulte;
 
-	@Override
-	public int numero() {
-		// TODO Auto-generated method stub
-		return 0;
+	public DVD(String nom, boolean estAdule) {
+		super(nom);
+		this.estAdulte = estAdule;
+	}
+
+	public boolean estAdule() {
+		return estAdulte;
 	}
 
 	@Override
-	public Abonne emprunteur() {
-		// TODO Auto-generated method stub
-		return null;
-	}
+    public void reservationPour(Abonne ab) {
+		if (reserveur != null) {
+            throw new IllegalStateException("Impossible de réserver un document déjà réservé");
+        } else if (emprunteur != null) {
+            throw new IllegalStateException("Impossible de réserver un document emprunté");
+        } else if (estAdulte && (ab.getAge() >= 16)) {
+			reserveur = ab;
+			return;
+		} else if (!estAdulte) {
+			reserveur = ab;
+			return;
+		}
+        throw new IllegalArgumentException("L'abonné n'a pas l'âge requis");
+    }
 
-	@Override
-	public Abonne reserveur() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public void reservationPour(Abonne ab) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void empruntPar(Abonne ab) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void retour() {
-		// TODO Auto-generated method stub
-
-	}
-
+    @Override
+    public void empruntPar(Abonne ab) {
+		if (emprunteur != null) {
+            throw new IllegalStateException("Impossible d'emprunter un document déjà emprunté");
+        } else if (estAdulte && (ab.getAge() >= 16)) {
+			emprunteur = ab;
+        	reserveur = null;
+			return;
+		} else if (!estAdulte) {
+			emprunteur = ab;
+        	reserveur = null;
+			return;
+		}
+        throw new IllegalArgumentException("L'abonné n'a pas l'âge requis");
+    }
 }

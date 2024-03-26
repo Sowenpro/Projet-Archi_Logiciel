@@ -28,7 +28,10 @@ public class ServiceEmpruntRendu implements Runnable {
 
 	@Override
 	public void run() {
-		// **** Methode Emprunt *****************
+		
+	}
+		
+	// **** Methode Emprunt *****************
 		empruntPar(Abonne ab,document doc){
 			Abonne emprunteur(doc)=emprunteur;
 				if (emprunteur==null) {
@@ -41,7 +44,7 @@ public class ServiceEmpruntRendu implements Runnable {
 		
 		
 		// **** Methode Retour *****************
-		retour(Abonne ab,document doc){
+		retour(document doc){
 			Abonne emprunteur(doc)= emprunteur;
 			reservationPour(Abonne ab) = reserveur;
 			if(!(emprunteur==null || reserveur==null)) {
@@ -53,4 +56,3 @@ public class ServiceEmpruntRendu implements Runnable {
 			}
 		}
 	}
-}

@@ -1,13 +1,15 @@
 package serveurs;
 import java.net.Socket;
+import java.util.List;
+
 import abonnes.Abonne;
 import documents.Document;
 
 public class ServiceReservation implements Runnable {	
 	// **** ressources partagées : les documents *****************
-	private static List<doc> lesDocuments;
+	private static List<Document> lesDocuments;
 
-	public static void setLesDocs(List<doc> lesDocuments) {
+	public static void setLesDocs(List<Document> lesDocuments) {
 		ServiceReservation.lesDocuments = lesDocuments;
 	}
 	
@@ -28,15 +30,5 @@ public class ServiceReservation implements Runnable {
 	
 	@Override
 	public void run() {
-		// **** Methode Reservation *****************	
-		reservationPour(Abonne ab, document doc){
-			Abonne reserveur(doc) = reserveur;
-			if (reserveur==null) {
-				Abonne reserveur = this.NumeroAb;
-			}
-			else {
-				System.out.println("Reservation impossible");
-			}
-		}
 	}
 }

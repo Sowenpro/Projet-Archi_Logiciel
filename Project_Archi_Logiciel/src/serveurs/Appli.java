@@ -1,5 +1,6 @@
 package serveurs;
 
+import java.sql.*;
 import java.util.Scanner;
 
 import abonnes.Abonne;
@@ -25,6 +26,9 @@ public class Appli {
 				System.out.print( "Veuillez saisir le numero du document: " );
 				String tempString2 = sc.nextLine();
 				sc.close();
+				Statement req1 = conn.createStatement();
+				String aString = "SELECT * FROM document WHERE numero="+tempString2+";";
+				ResultSet rs =  req1.executeQuery(aString);
 				//Document.emprunterPar();
 			}
 			else if (reponse=="retourner") {

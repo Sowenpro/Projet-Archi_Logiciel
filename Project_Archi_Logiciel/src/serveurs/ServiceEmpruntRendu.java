@@ -1,14 +1,16 @@
 package serveurs;
 import java.net.Socket;
+import java.util.List;
+
 import abonnes.Abonne;
 import documents.Document;
 
 public class ServiceEmpruntRendu implements Runnable {
 
 	// **** ressources partagées : les documents *****************
-	private static List<doc> lesDocuments;
+	private static List<Document> lesDocuments;
 
-	public static void setLesDocs(List<doc> lesDocuments) {
+	public static void setLesDocs(List<Document> lesDocuments) {
 		ServiceEmpruntRendu.lesDocuments = lesDocuments;
 	}
 	
@@ -30,29 +32,4 @@ public class ServiceEmpruntRendu implements Runnable {
 	public void run() {
 		
 	}
-		
-	// **** Methode Emprunt *****************
-		empruntPar(Abonne ab,document doc){
-			Abonne emprunteur(doc)=emprunteur;
-				if (emprunteur==null) {
-					Abonne emprunteur = this.NumeroAb;
-				}
-				else {
-					System.out.println("Emprunt impossible");
-				}	
-			}
-		
-		
-		// **** Methode Retour *****************
-		retour(document doc){
-			Abonne emprunteur(doc)= emprunteur;
-			reservationPour(Abonne ab) = reserveur;
-			if(!(emprunteur==null || reserveur==null)) {
-				Abonne emprunteur = null;
-				Abonne reserveur = null;
-			}
-			else {
-				System.out.println("Retour impossible");
-			}
-		}
-	}
+}

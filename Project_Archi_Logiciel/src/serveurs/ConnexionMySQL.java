@@ -3,7 +3,7 @@ import java.sql.*;
 
 
 public class ConnexionMySQL {
-	static final String DB_URL = "jdbc:mysql://localhost:3306/Mediatheque?useSSL=false"; // MySQL
+	static final String DB_URL = "jdbc:mysql://localhost:3306/mediatheque?useSSL=false"; // MySQL
 	static final String USER = "root";
 	static final String PASS = "root";
 

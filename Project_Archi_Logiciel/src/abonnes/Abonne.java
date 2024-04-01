@@ -23,8 +23,7 @@ public class Abonne {
     }
 
     public int getAge() {
-        // à coder plus tard
-        DateDeNaissanceAb.compareTo(DateDeNaissanceAb);
-        return 0;
+        Date d = new Date(System.currentTimeMillis() - DateDeNaissanceAb.getTime());
+        return d.toLocalDate().getYear();
     }
 }

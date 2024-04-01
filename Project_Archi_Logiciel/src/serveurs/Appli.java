@@ -25,7 +25,7 @@ public class Appli {
 				}
 				else if (reponse.compareTo("r") == 0) {
 					System.out.print( "Veuillez saisir le numero du document: " );
-					String tempString = sc.nextLine();
+					String tempString = sc.next();
 					sc.close();
 					//Document.retour(tempString);
 					return;
@@ -43,9 +43,9 @@ public class Appli {
 			}
 		}
 		else if (port == 3000) {
-			System.out.print( "Veuillez saisir votre numero d'abonne: " );
+			System.out.print("Réservation\nVeuillez saisir votre numero d'abonne: " );
 			int tempString1 = sc.nextInt();
-			System.out.println("Quel document voulez-vous retourner ?");
+			System.out.println("Quel document voulez-vous réserver ?");
 			String tempString2 = sc.next();
 			sc.close();
 			//Document.reservationPour(tempString1,tempString2);

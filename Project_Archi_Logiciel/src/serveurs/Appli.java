@@ -10,11 +10,7 @@ public class Appli {
 		Scanner sc = new Scanner(System.in);
 		System.out.println("Choisir un port entre 3000 ou 4000");
 		int port = sc.nextInt();
-		if (!(port == 3000 || port == 4000)) {
-			sc.close();
-			throw new IllegalArgumentException("Port indisponible");
-		}
-		else if (port == 4000) {
+		if (port == 4000) {
 			while (true) {
 				System.out.println("Voulez-vous emprunter ou retourner ? (e/r)");
 				String reponse = sc.next();
@@ -54,6 +50,9 @@ public class Appli {
 			sc.close();
 			//Document.reservationPour(tempString1,tempString2);
 			return;
+		} else {
+			sc.close();
+			throw new IllegalArgumentException("Port indisponible");
 		}
 	}
 }

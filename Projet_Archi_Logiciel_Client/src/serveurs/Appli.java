@@ -1,9 +1,6 @@
 package serveurs;
 
-import java.sql.*;
 import java.util.Scanner;
-import abonnes.Abonne;
-import documents.Document;
 
 public class Appli {
 	public static void main(String[] args) {

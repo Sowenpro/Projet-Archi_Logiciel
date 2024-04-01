@@ -2,7 +2,7 @@ package documents;
 
 import abonnes.Abonne;
 
-public class AbstracDocument implements Document {
+public abstract class AbstracDocument implements Document {
     private static int cpt = 0;
     protected int num;
     protected String nom;

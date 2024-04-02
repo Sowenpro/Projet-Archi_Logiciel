@@ -4,17 +4,19 @@ import java.io.*;
 import java.net.*;
 
 public class ServeurReservation implements Runnable {
-	private ServerSocket listen_socket;
+	public ServerSocket listen_socket;
+	private final int port = 3000;
 
-	public ServeurReservation(int PORT) throws IOException {
-		listen_socket = new ServerSocket(PORT);
+	public ServeurReservation(int port) throws IOException {
+		listen_socket = new ServerSocket(port);
 	}
 
+	@Override
 	public void run() {
 		try {
 			System.err.println("Lancement du serveur au port " + this.listen_socket.getLocalPort());
 			while (true)
-				new Thread(new ServiceReservation(listen_socket.accept())).start();
+				new Thread(new AppServeurResevation(listen_socket.accept())).start();
 		} 
 		catch (IOException e) {
 			try {
@@ -23,15 +25,6 @@ public class ServeurReservation implements Runnable {
 			catch (IOException e1) {
 			}
 			System.err.println("Arrêt du serveur au port " + this.listen_socket.getLocalPort());
-		}
-	}
-
-	// restituer les ressources --> finalize
-	protected void finalize() throws Throwable {
-		try {
-			this.listen_socket.close();
-		} 
-		catch (IOException e1) {
 		}
 	}
 }

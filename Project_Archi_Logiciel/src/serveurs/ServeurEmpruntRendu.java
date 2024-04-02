@@ -5,7 +5,7 @@ import java.net.*;
 
 public class ServeurEmpruntRendu implements Runnable {
 	public ServerSocket listen_socket;
-	private final int port = 4000;
+	private final static int port = 4000;
 
 	public ServeurEmpruntRendu(int port) throws IOException {
 		listen_socket = new ServerSocket(port);

@@ -23,13 +23,26 @@ public class AppServeurEmpruntRendu implements Runnable{
 	public void run() {
 		try {
 			try{
+				// **** Connexion à la base de donnée *****************
+				
 				Connection conn = DriverManager.getConnection(DB_URL, USER, PASS);
 				conn = DriverManager.getConnection(DB_URL, USER, PASS);
 				conn.setAutoCommit(false);
 				System.out.println("On est connecté au serveur sur la base Mediatheque");
+				// ********************************************************
+				
+				
+				// **** Ressources partagées : les documents & les abonnés *****************
+				
 				//ArrayList<Document> docs = (ArrayList<Document>) getDocument(conn);
 				//ArrayList<Abonne> abos = (ArrayList<Abonne>) getAbonne(conn);
+				// ********************************************************
+				
+				
+				// **** Lancement du serveur *****************
+				
 				System.out.println("Serveur lancé sur le port 4000");
+				// ********************************************************
 			}
 			catch(SQLException e ){
 				e.printStackTrace();

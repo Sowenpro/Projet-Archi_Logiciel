@@ -24,6 +24,7 @@ public class AppServeurResevation implements Runnable{
 		try {
 			try{
 				// **** Connexion à la base de donnée *****************
+				
 				Connection conn = DriverManager.getConnection(DB_URL, USER, PASS);
 				conn = DriverManager.getConnection(DB_URL, USER, PASS);
 				conn.setAutoCommit(false);
@@ -38,7 +39,7 @@ public class AppServeurResevation implements Runnable{
 				// ********************************************************
 				
 				
-				// **** Lancement du thread *****************
+				// **** Lancement du serveur *****************
 				
 				System.out.println("Serveur lancé sur le port 3000");
 				// ********************************************************

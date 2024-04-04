@@ -51,6 +51,7 @@ public class Appli {
 						String rep = sc.next();
 						rep = sc.next();
 						if (rep.compareTo("y") == 0) {
+							out.writeUTF(rep);
 							sc.close();
 
 						} 
@@ -89,6 +90,7 @@ public class Appli {
 						String rep = sc.next();
 						rep = sc.next();
 						if (rep.compareTo("y") == 0) {
+							out.writeUTF(rep);
 							sc.close();
 
 						} 

@@ -22,6 +22,11 @@ public class AppServeurEmpruntRendu implements Runnable{
 	@Override
 	public void run() {
 		try {
+			// **** Ressources partagées : les documents & les abonnés *****************
+			
+			ArrayList<Document> docs = null; //= (ArrayList<Document>) getDocument(conn);
+			ArrayList<Abonne> abos = null; //= (ArrayList<Abonne>) getAbonne(conn);
+			// ********************************************************
 			try{
 				// **** Connexion à la base de donnée *****************
 				
@@ -30,14 +35,6 @@ public class AppServeurEmpruntRendu implements Runnable{
 				conn.setAutoCommit(false);
 				System.out.println("On est connecté au serveur sur la base Mediatheque");
 				// ********************************************************
-				
-				
-				// **** Ressources partagées : les documents & les abonnés *****************
-				
-				//ArrayList<Document> docs = (ArrayList<Document>) getDocument(conn);
-				//ArrayList<Abonne> abos = (ArrayList<Abonne>) getAbonne(conn);
-				// ********************************************************
-				
 				
 				// **** Lancement du serveur *****************
 				
@@ -58,9 +55,20 @@ public class AppServeurEmpruntRendu implements Runnable{
 				phrase_serveur = ("Vous avez choisi d'emprunter\nVeuillez saisir votre numero d'abonné: ");
 				out.writeUTF(phrase_serveur);
 				Integer numAb = in.readInt();
+				Abonne abonne = null;
+				for(Abonne a : abos) {
+					if(numAb == a.getNum()) {
+						abonne = a;
+					}
+				}
 				phrase_serveur = ("Veuillez saisir le numéro du document: ");
 				out.writeUTF(phrase_serveur);
-				String empruntdoc = in.readUTF();
+				Integer empruntdoc = in.readInt();
+				for(Document doc : docs) {
+					if(empruntdoc == doc.numero()) {
+						doc.reservationPour(abonne);
+					}
+				}
 				String msgconfirmation = numAb +" a emprunté le document "+ empruntdoc;
 				out.writeUTF(msgconfirmation);
 			}
@@ -68,6 +76,11 @@ public class AppServeurEmpruntRendu implements Runnable{
 				phrase_serveur = ("Vous avez choisi de retourner\nVeuillez saisir le numéro du document: ");
 				out.writeUTF(phrase_serveur);
 				Integer returndoc = in.readInt();
+				for(Document doc : docs) {
+					if(returndoc == doc.numero()) {
+						doc.retour();
+					}
+				}
 				String msgconfirmation = "Vous avez rendu le document "+ returndoc;
 				out.writeUTF(msgconfirmation);
 			}

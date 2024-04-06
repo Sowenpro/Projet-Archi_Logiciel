@@ -58,7 +58,7 @@ public class Appli {
 						}
 					}
 					phrase_serveur_err = in.readUTF();
-					System.out.println(phrase_serveur_err);s
+					System.out.println(phrase_serveur_err);
 				}
 			}
 		}

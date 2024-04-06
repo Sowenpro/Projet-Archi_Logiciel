@@ -10,7 +10,7 @@ public class DVD extends AbstracDocument {
 		this.estAdulte = estAdule;
 	}
 
-	public boolean estAdule() {
+	public boolean estAdulte() {
 		return estAdulte;
 	}
 

@@ -49,31 +49,38 @@ public class AppServeurResevation implements Runnable{
 			}
 			DataOutputStream out = new DataOutputStream(socket.getOutputStream());
 			DataInputStream in = new DataInputStream(socket.getInputStream());
-			System.out.println("Voulez-vous réserver ou quitter ? (r/q)");
+			String phrase_serveur;
+			String phrase_serveur_err;
+			phrase_serveur = ("Voulez-vous réserver ou quitter ? (r/q)");
+			out.writeUTF(phrase_serveur);
 			String reponse = in.readUTF();
 			if (reponse.compareTo("r") == 0) {
-				System.out.println("Veuillez saisir votre numéro d'abonné: ");
+				phrase_serveur = ("Veuillez saisir votre numéro d'abonné: ");
+				out.writeUTF(phrase_serveur);
 				Integer numAb = in.readInt();
-				System.out.println("Veuillez saisir le numéro du document: ");
+				phrase_serveur = ("Veuillez saisir le numéro du document: ");
+				out.writeUTF(phrase_serveur);
 				String reservationdoc = in.readUTF();
 				String msgconfirmation = numAb +" a réservé le document "+ reservationdoc;
 				out.writeUTF(msgconfirmation);
 			}
 			else if (reponse.compareTo("q") == 0) {
-				System.out.println("Voulez-vous vraiment quitter l'application ? (y/n)");
+				phrase_serveur = ("Voulez-vous vraiment quitter l'application ? (y/n)");
+				out.writeUTF(phrase_serveur);
 				String rep = in.readUTF();
 				if (rep.compareTo("y") == 0) {
 				socket.close();
 				}
 				else if (rep.compareTo("n") == 0) {
-					System.out.println("Donc que voulez-vous réserver ? (r)");
 				}
 				else {
-					System.out.println("Commande inconnue, veuillez réessayer. (y/n)");
+					phrase_serveur_err = ("Commande inconnue, veuillez réessayer. (y/n)");
+					out.writeUTF(phrase_serveur_err);
 				}
 			}
 			else {
-				System.out.println("Commande inconnue, veuillez réessayer.(r/q)");
+				phrase_serveur_err = ("Commande inconnue, veuillez réessayer.(r/q)");
+				out.writeUTF(phrase_serveur_err);
 			}
 			
 		}

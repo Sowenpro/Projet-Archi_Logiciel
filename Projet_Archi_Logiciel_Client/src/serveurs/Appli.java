@@ -18,15 +18,23 @@ public class Appli {
 				try (
 				Socket client = new Socket("localhost", port)) {
 					DataOutputStream out = new DataOutputStream(client.getOutputStream());
+					DataInputStream in = new DataInputStream(client.getInputStream());
+					String phrase_serveur;
+					String phrase_serveur_err;
+					phrase_serveur = in.readUTF();
+					System.out.println(phrase_serveur);
 					String reponse = sc.next();
 					out.writeUTF(reponse);
 					if (reponse.compareTo("e") == 0) {
+						phrase_serveur = in.readUTF();
+						System.out.println(phrase_serveur);
 						int numAb = sc.nextInt();
 						out.writeInt(numAb);
+						phrase_serveur = in.readUTF();
+						System.out.println(phrase_serveur);
 						String empruntdoc = sc.next();
 						out.writeUTF(empruntdoc);
 						//Recevoir le message de confirmatiion
-						DataInputStream in = new DataInputStream(client.getInputStream());
 						String msgconfirmation = in.readUTF();
 						System.out.println(msgconfirmation);
 					}
@@ -34,14 +42,23 @@ public class Appli {
 						Integer returndoc = sc.nextInt();
 						out.writeInt(returndoc);
 						//Recevoir le message de confirmatiion
-						DataInputStream in = new DataInputStream(client.getInputStream());
 						String msgconfirmation = in.readUTF();
 						System.out.println(msgconfirmation);
 					}
 					if (reponse.compareTo("q") == 0) {
+						phrase_serveur = in.readUTF();
+						System.out.println(phrase_serveur);
 						String rep = sc.next();
-						out.writeUTF(rep);
+						if(rep == "y" || rep =="n" ) {
+							out.writeUTF(rep);
+						}
+						else {
+							phrase_serveur_err = in.readUTF();
+							System.out.println(phrase_serveur_err);
+						}
 					}
+					phrase_serveur_err = in.readUTF();
+					System.out.println(phrase_serveur_err);s
 				}
 			}
 		}
@@ -51,22 +68,40 @@ public class Appli {
 				try (
 				Socket reservation = new Socket("localhost", port)) {
 					DataOutputStream out = new DataOutputStream(reservation.getOutputStream());
+					DataInputStream in = new DataInputStream(reservation.getInputStream());
+					String phrase_serveur;
+					String phrase_serveur_err;
+					phrase_serveur = in.readUTF();
+					System.out.println(phrase_serveur);
 					String reponse = sc.next();
 					out.writeUTF(reponse);
 					if (reponse.compareTo("r") == 0) {
+						phrase_serveur = in.readUTF();
+						System.out.println(phrase_serveur);
 						int numAb = sc.nextInt();
 						out.writeInt(numAb);
+						phrase_serveur = in.readUTF();
+						System.out.println(phrase_serveur);
 						String reservationdoc = sc.next();
 						out.writeUTF(reservationdoc);
+						//Recevoir le message de confirmatiion
+						String msgconfirmation = in.readUTF();
+						System.out.println(msgconfirmation);
 					}
 					if (reponse.compareTo("q") == 0) {
+						phrase_serveur = in.readUTF();
+						System.out.println(phrase_serveur);
 						String rep = sc.next();
-						out.writeUTF(rep);
+						if(rep == "y" || rep =="n" ) {
+							out.writeUTF(rep);
+						}
+						else {
+							phrase_serveur_err = in.readUTF();
+							System.out.println(phrase_serveur_err);
+						}
 					}
-					//Recevoir le message de confirmatiion
-					DataInputStream in = new DataInputStream(reservation.getInputStream());
-					String msgconfirmation = in.readUTF();
-					System.out.println(msgconfirmation);
+					phrase_serveur_err = in.readUTF();
+					System.out.println(phrase_serveur_err);
 				}					
 			}
 		}

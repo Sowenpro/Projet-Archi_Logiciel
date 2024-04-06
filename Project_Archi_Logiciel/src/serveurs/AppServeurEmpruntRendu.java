@@ -47,44 +47,48 @@ public class AppServeurEmpruntRendu implements Runnable{
 			catch(SQLException e ){
 				e.printStackTrace();
 			}
-			
 			DataInputStream in = new DataInputStream(socket.getInputStream());
 			DataOutputStream out = new DataOutputStream(socket.getOutputStream());
-			System.out.println("Voulez-vous emprunter, retourner ou quitter ? (e/r/q)");
+			String phrase_serveur;
+			String phrase_serveur_err;
+			phrase_serveur = ("Voulez-vous emprunter, retourner ou quitter ? (e/r/q)");
+			out.writeUTF(phrase_serveur);
 			String reponse = in.readUTF();
 			if (reponse.compareTo("e") == 0) {
-				System.out.println("Vous avez choisi d'emprunter");
-				System.out.print("Veuillez saisir votre numero d'abonné: ");
+				phrase_serveur = ("Vous avez choisi d'emprunter\nVeuillez saisir votre numero d'abonné: ");
+				out.writeUTF(phrase_serveur);
 				Integer numAb = in.readInt();
-				System.out.println("Veuillez saisir le numéro du document: ");
+				phrase_serveur = ("Veuillez saisir le numéro du document: ");
+				out.writeUTF(phrase_serveur);
 				String empruntdoc = in.readUTF();
 				String msgconfirmation = numAb +" a emprunté le document "+ empruntdoc;
 				out.writeUTF(msgconfirmation);
 			}
 			else if (reponse.compareTo("r") == 0) {
-				System.out.println("Vous avez choisi de retourner");
-				System.out.print("Veuillez saisir le numéro du document: ");
+				phrase_serveur = ("Vous avez choisi de retourner\nVeuillez saisir le numéro du document: ");
+				out.writeUTF(phrase_serveur);
 				Integer returndoc = in.readInt();
 				String msgconfirmation = "Vous avez rendu le document "+ returndoc;
 				out.writeUTF(msgconfirmation);
 			}
 			else if (reponse.compareTo("q") == 0) {
-				System.out.println("Voulez-vous vraiment quitter l'application ? (y/n)");
+				phrase_serveur = ("Voulez-vous vraiment quitter l'application ? (y/n)");
+				out.writeUTF(phrase_serveur);
 				String rep = in.readUTF();
 				if (rep.compareTo("y") == 0) {
 				socket.close();
 				}
 				else if (rep.compareTo("n") == 0) {
-					System.out.println("Donc que voulez-vous réserver ? (r)");
 				}
 				else {
-					System.out.println("Commande inconnue, veuillez réessayer. (y/n)");
+					phrase_serveur_err = ("Commande inconnue, veuillez réessayer. (y/n)");
+					out.writeUTF(phrase_serveur_err);
 				}
 			}
 			else {
-				System.out.println("Commande inconnue, veuillez réessayer.(e/r/q)");
-			}
-			
+				phrase_serveur_err = ("Commande inconnue, veuillez réessayer.(e/r/q)");
+				out.writeUTF(phrase_serveur_err);
+			}	
 		}
 		catch(IOException e){
 			e.printStackTrace();

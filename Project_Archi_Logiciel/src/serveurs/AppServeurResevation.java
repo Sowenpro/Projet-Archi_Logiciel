@@ -47,18 +47,33 @@ public class AppServeurResevation implements Runnable{
 			catch(SQLException e){
 				e.printStackTrace();
 			}
-			
+			DataOutputStream out = new DataOutputStream(socket.getOutputStream());
 			DataInputStream in = new DataInputStream(socket.getInputStream());
+			System.out.println("Voulez-vous réserver ou quitter ? (r/q)");
 			String reponse = in.readUTF();
-			if (reponse == "r") {
-				DataOutputStream out = new DataOutputStream(socket.getOutputStream());
+			if (reponse.compareTo("r") == 0) {
+				System.out.println("Veuillez saisir votre numéro d'abonné: ");
 				Integer numAb = in.readInt();
+				System.out.println("Veuillez saisir le numéro du document: ");
 				String reservationdoc = in.readUTF();
 				String msgconfirmation = numAb +" a réservé le document "+ reservationdoc;
 				out.writeUTF(msgconfirmation);
 			}
-			else if (reponse == "q") {
+			else if (reponse.compareTo("q") == 0) {
+				System.out.println("Voulez-vous vraiment quitter l'application ? (y/n)");
+				String rep = in.readUTF();
+				if (rep.compareTo("y") == 0) {
 				socket.close();
+				}
+				else if (rep.compareTo("n") == 0) {
+					System.out.println("Donc que voulez-vous réserver ? (r)");
+				}
+				else {
+					System.out.println("Commande inconnue, veuillez réessayer. (y/n)");
+				}
+			}
+			else {
+				System.out.println("Commande inconnue, veuillez réessayer.(r/q)");
 			}
 			
 		}

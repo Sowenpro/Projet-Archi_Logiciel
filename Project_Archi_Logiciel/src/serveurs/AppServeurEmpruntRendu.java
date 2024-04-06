@@ -49,22 +49,40 @@ public class AppServeurEmpruntRendu implements Runnable{
 			}
 			
 			DataInputStream in = new DataInputStream(socket.getInputStream());
+			DataOutputStream out = new DataOutputStream(socket.getOutputStream());
+			System.out.println("Voulez-vous emprunter, retourner ou quitter ? (e/r/q)");
 			String reponse = in.readUTF();
-			if (reponse == "e") {
-				DataOutputStream out = new DataOutputStream(socket.getOutputStream());
+			if (reponse.compareTo("e") == 0) {
+				System.out.println("Vous avez choisi d'emprunter");
+				System.out.print("Veuillez saisir votre numero d'abonné: ");
 				Integer numAb = in.readInt();
+				System.out.println("Veuillez saisir le numéro du document: ");
 				String empruntdoc = in.readUTF();
 				String msgconfirmation = numAb +" a emprunté le document "+ empruntdoc;
 				out.writeUTF(msgconfirmation);
 			}
-			else if (reponse == "r") {
-				DataOutputStream out = new DataOutputStream(socket.getOutputStream());
+			else if (reponse.compareTo("r") == 0) {
+				System.out.println("Vous avez choisi de retourner");
+				System.out.print("Veuillez saisir le numéro du document: ");
 				Integer returndoc = in.readInt();
 				String msgconfirmation = "Vous avez rendu le document "+ returndoc;
 				out.writeUTF(msgconfirmation);
 			}
-			if (reponse == "q") {
+			else if (reponse.compareTo("q") == 0) {
+				System.out.println("Voulez-vous vraiment quitter l'application ? (y/n)");
+				String rep = in.readUTF();
+				if (rep.compareTo("y") == 0) {
 				socket.close();
+				}
+				else if (rep.compareTo("n") == 0) {
+					System.out.println("Donc que voulez-vous réserver ? (r)");
+				}
+				else {
+					System.out.println("Commande inconnue, veuillez réessayer. (y/n)");
+				}
+			}
+			else {
+				System.out.println("Commande inconnue, veuillez réessayer.(e/r/q)");
 			}
 			
 		}

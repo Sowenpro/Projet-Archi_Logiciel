@@ -36,6 +36,7 @@ public class AppServeurEmpruntRendu implements Runnable{
 				System.out.println("On est connecté au serveur sur la base Mediatheque");
 				// ********************************************************
 				
+				
 				// **** Lancement du serveur *****************
 				
 				System.out.println("Serveur lancé sur le port 4000");

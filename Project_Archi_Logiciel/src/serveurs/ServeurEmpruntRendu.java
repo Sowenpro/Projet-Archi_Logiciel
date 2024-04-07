@@ -49,10 +49,10 @@ public class ServeurEmpruntRendu implements Runnable {
 	        while (rs.next()) {
 	            int NumeroDoc = rs.getInt("NumeroDoc");
 	            String TitreDoc = rs.getString("TitreDoc");
-	            String TypeDoc = rs.getString("TypeDoc");
 	            String emprunteur = rs.getString("emprunteur");
 	            String reserveur = rs.getString("reserveur");
-	            docs.add(new DVD(NumeroDoc, TitreDoc, TypeDoc, emprunteur, reserveur));
+	            String TypeDoc = rs.getString("TypeDoc");
+	            docs.add(new DVD(NumeroDoc, TitreDoc, emprunteur, reserveur));
 	        }
 	        rs.close();
 	        stmt.close();

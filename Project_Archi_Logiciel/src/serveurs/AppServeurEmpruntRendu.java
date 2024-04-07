@@ -103,11 +103,11 @@ public class AppServeurEmpruntRendu implements Runnable{
 					out.writeUTF(phrase_serveur_err);
 				}	
 			}
-			catch(IOException e){
+			catch(SQLException e ){
 				e.printStackTrace();
 			}
 		}
-		catch(SQLException e ){
+		catch(IOException e){
 			e.printStackTrace();
 		}
 	}

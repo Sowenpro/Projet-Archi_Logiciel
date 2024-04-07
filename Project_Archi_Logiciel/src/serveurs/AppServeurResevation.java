@@ -42,58 +42,57 @@ public class AppServeurResevation implements Runnable{
 				
 				ArrayList<Document> docs = (ArrayList<Document>)ServeurReservation.getDocument(conn);
 				ArrayList<Abonne> abos = (ArrayList<Abonne>)ServeurReservation.getAbonne(conn);
-				// ********************************************************
-			}
-			catch(SQLException e){
-				e.printStackTrace();
-			}			
-			DataOutputStream out = new DataOutputStream(socket.getOutputStream());
-			DataInputStream in = new DataInputStream(socket.getInputStream());
-			String phrase_serveur;
-			String phrase_serveur_err;
-			phrase_serveur = ("Voulez-vous réserver ou quitter ? (r/q)");
-			out.writeUTF(phrase_serveur);
-			String reponse = in.readUTF();
-			if (reponse.compareTo("r") == 0) {
-				phrase_serveur = ("Veuillez saisir votre numéro d'abonné: ");
+				// ********************************************************			
+				DataOutputStream out = new DataOutputStream(socket.getOutputStream());
+				DataInputStream in = new DataInputStream(socket.getInputStream());
+				String phrase_serveur;
+				String phrase_serveur_err;
+				phrase_serveur = ("Voulez-vous réserver ou quitter ? (r/q)");
 				out.writeUTF(phrase_serveur);
-				Integer numAb = in.readInt();
-				Abonne abonne = null;
-				for(Abonne a : abos) {
-					if(numAb == a.getNum()) {
-						abonne = a;
+				String reponse = in.readUTF();
+				if (reponse.compareTo("r") == 0) {
+					phrase_serveur = ("Veuillez saisir votre numéro d'abonné: ");
+					out.writeUTF(phrase_serveur);
+					Integer numAb = in.readInt();
+					Abonne abonne = null;
+					for(Abonne a : abos) {
+						if(numAb == a.getNum()) {
+							abonne = a;
+						}
 					}
-				}
-				phrase_serveur = ("Veuillez saisir le numéro du document: ");
-				out.writeUTF(phrase_serveur);
-				Integer reservationdoc = in.readInt();
-				for(Document doc : docs) {
-					if(reservationdoc == doc.numero()) {
-						doc.reservationPour(abonne);
+					phrase_serveur = ("Veuillez saisir le numéro du document: ");
+					out.writeUTF(phrase_serveur);
+					Integer reservationdoc = in.readInt();
+					for(Document doc : docs) {
+						if(reservationdoc == doc.numero()) {
+							doc.reservationPour(abonne);
+						}
 					}
+					String msgconfirmation = numAb +" a réservé le document "+ reservationdoc;
+					out.writeUTF(msgconfirmation);
 				}
-				String msgconfirmation = numAb +" a réservé le document "+ reservationdoc;
-				out.writeUTF(msgconfirmation);
-			}
-			else if (reponse.compareTo("q") == 0) {
-				phrase_serveur = ("Voulez-vous vraiment quitter l'application ? (y/n)");
-				out.writeUTF(phrase_serveur);
-				String rep = in.readUTF();
-				if (rep.compareTo("y") == 0) {
-				socket.close();
-				}
-				else if (rep.compareTo("n") == 0) {
+				else if (reponse.compareTo("q") == 0) {
+					phrase_serveur = ("Voulez-vous vraiment quitter l'application ? (y/n)");
+					out.writeUTF(phrase_serveur);
+					String rep = in.readUTF();
+					if (rep.compareTo("y") == 0) {
+					socket.close();
+					}
+					else if (rep.compareTo("n") == 0) {
+					}
+					else {
+						phrase_serveur_err = ("Commande inconnue, veuillez réessayer. (y/n)");
+						out.writeUTF(phrase_serveur_err);
+					}
 				}
 				else {
-					phrase_serveur_err = ("Commande inconnue, veuillez réessayer. (y/n)");
+					phrase_serveur_err = ("Commande inconnue, veuillez réessayer.(r/q)");
 					out.writeUTF(phrase_serveur_err);
 				}
 			}
-			else {
-				phrase_serveur_err = ("Commande inconnue, veuillez réessayer.(r/q)");
-				out.writeUTF(phrase_serveur_err);
+			catch(SQLException e){
+				e.printStackTrace();
 			}
-			
 		}
 		catch(IOException e){
 			e.printStackTrace();

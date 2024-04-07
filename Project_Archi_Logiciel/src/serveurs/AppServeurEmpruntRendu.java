@@ -60,6 +60,10 @@ public class AppServeurEmpruntRendu implements Runnable{
 						if(numAb == a.getNum()) {
 							abonne = a;
 						}
+						else {
+							phrase_serveur = ("Abonne inconnue, veuillez donner un NumAb valide.");
+							out.writeUTF(phrase_serveur);
+						}
 					}
 					phrase_serveur = ("Veuillez saisir le numéro du document: ");
 					out.writeUTF(phrase_serveur);
@@ -67,6 +71,10 @@ public class AppServeurEmpruntRendu implements Runnable{
 					for(Document doc : docs) {
 						if(empruntdoc == doc.numero()) {
 							doc.reservationPour(abonne);
+						}
+						else {
+							phrase_serveur = ("Document inconnue, veuillez donner un document valide.");
+							out.writeUTF(phrase_serveur);
 						}
 					}
 					String msgconfirmation = numAb +" a emprunté le document "+ empruntdoc;
@@ -79,6 +87,10 @@ public class AppServeurEmpruntRendu implements Runnable{
 					for(Document doc : docs) {
 						if(returndoc == doc.numero()) {
 							doc.retour();
+						}
+						else {
+							phrase_serveur = ("Document inconnue, veuillez donner un document valide.");
+							out.writeUTF(phrase_serveur);
 						}
 					}
 					String msgconfirmation = "Vous avez rendu le document "+ returndoc;

@@ -59,6 +59,10 @@ public class AppServeurResevation implements Runnable{
 						if(numAb == a.getNum()) {
 							abonne = a;
 						}
+						else {
+							phrase_serveur = ("Abonne inconnue, veuillez donner un NumAb valide.");
+							out.writeUTF(phrase_serveur);
+						}
 					}
 					phrase_serveur = ("Veuillez saisir le numéro du document: ");
 					out.writeUTF(phrase_serveur);
@@ -66,6 +70,10 @@ public class AppServeurResevation implements Runnable{
 					for(Document doc : docs) {
 						if(reservationdoc == doc.numero()) {
 							doc.reservationPour(abonne);
+						}
+						else {
+							phrase_serveur = ("Document inconnue, veuillez donner un document valide.");
+							out.writeUTF(phrase_serveur);
 						}
 					}
 					String msgconfirmation = numAb +" a réservé le document "+ reservationdoc;

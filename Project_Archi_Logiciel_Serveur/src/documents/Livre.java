@@ -2,7 +2,7 @@ package documents;
 
 import abonnes.Abonne;
 
-public class Livre extends AbstracDocument {
+public class Livre extends AbstractDocument {
 	private int nbPages;
 	
 	public Livre(int NumeroDoc, String TitreDoc, Abonne emprunteur, Abonne reserveur, int nbPages) {

@@ -2,7 +2,7 @@ package documents;
 
 import abonnes.Abonne;
 
-public class DVD extends AbstracDocument {
+public class DVD extends AbstractDocument {
 	private boolean estAdulte;
 
 	public DVD(int NumeroDoc, String TitreDoc, Abonne emprunteur, Abonne reserveur, boolean estAdulte) {

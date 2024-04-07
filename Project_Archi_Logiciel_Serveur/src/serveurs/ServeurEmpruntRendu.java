@@ -10,7 +10,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 
 import abonnes.Abonne;
-import documents.AbstracDocument;
+import documents.AbstractDocument;
 import documents.DVD;
 import documents.Document;
 import documents.Livre;

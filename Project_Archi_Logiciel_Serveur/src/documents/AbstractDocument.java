@@ -2,13 +2,13 @@ package documents;
 
 import abonnes.Abonne;
 
-public abstract class AbstracDocument implements Document {
+public abstract class AbstractDocument implements Document {
     protected int NumeroDoc;
     protected String TitreDoc;
     protected Abonne emprunteur;
     protected Abonne reserveur;
 
-    public AbstracDocument(int NumeroDoc, String TitreDoc, Abonne emprunteur, Abonne reserveur) {
+    public AbstractDocument(int NumeroDoc, String TitreDoc, Abonne emprunteur, Abonne reserveur) {
     	this.NumeroDoc = NumeroDoc;
         this.TitreDoc = TitreDoc;
         this.emprunteur = emprunteur;

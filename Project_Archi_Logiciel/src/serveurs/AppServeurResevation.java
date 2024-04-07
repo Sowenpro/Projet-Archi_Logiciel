@@ -36,16 +36,17 @@ public class AppServeurResevation implements Runnable{
 				
 				System.out.println("Serveur lancé sur le port 3000");
 				// ********************************************************
+				
+				
+				// **** Ressources partagées : les documents & les abonnés *****************
+				
+				ArrayList<Document> docs = (ArrayList<Document>)getDocument(conn);
+				ArrayList<Abonne> abos = (ArrayList<Abonne>)getAbonne(conn);
+				// ********************************************************
 			}
 			catch(SQLException e){
 				e.printStackTrace();
-			}
-			// **** Ressources partagées : les documents & les abonnés *****************
-			
-			ArrayList<Document> docs = null; //(ArrayList<Document>)getDocument(conn);
-			ArrayList<Abonne> abos = null; //(ArrayList<Abonne>)getAbonne(conn);
-			// ********************************************************
-						
+			}			
 			DataOutputStream out = new DataOutputStream(socket.getOutputStream());
 			DataInputStream in = new DataInputStream(socket.getInputStream());
 			String phrase_serveur;

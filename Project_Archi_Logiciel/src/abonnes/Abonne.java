@@ -3,18 +3,17 @@ package abonnes;
 import java.sql.Date;
 
 public class Abonne {
-    private static int cpt = 0;
     private int NumeroAb;
     private String NomAb;
     private Date DateDeNaissanceAb;
 
-    public Abonne(String nom, Date datenaiss) {
-        NumeroAb = cpt++;
+    public Abonne(Integer NumeroAb, String nom, Date datenaiss) {
+        NumeroAb = null;
         NomAb = nom;
         DateDeNaissanceAb = datenaiss;
     }
 
-    public int getNum() {
+	public int getNum() {
         return NumeroAb;
     }
 

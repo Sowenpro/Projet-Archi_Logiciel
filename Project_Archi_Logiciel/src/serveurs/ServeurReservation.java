@@ -54,12 +54,17 @@ public class ServeurReservation implements Runnable {
 	            int reserveur = rs.getInt("reserveur");
 	            boolean estAdulte = rs.getBoolean("estAdulte");
 	            int nbPages = rs.getInt("nbPages");
-	            docs.add(new DVD(NumeroDoc, TitreDoc, TypeDoc, emprunteur, reserveur, estAdulte));
-	            docs.add(new Livre(NumeroDoc, TitreDoc, TypeDoc, emprunteur, reserveur, nbPages));
+	            if (TypeDoc.equals("DVD")) {
+		            docs.add(new DVD(NumeroDoc, TitreDoc, TypeDoc, emprunteur, reserveur, estAdulte));
+		            }
+		            else if (TypeDoc.equals("Livre")) {
+		            docs.add(new Livre(NumeroDoc, TitreDoc, TypeDoc, emprunteur, reserveur, nbPages));
+		            }
 	        }
 	        rs.close();
 	        stmt.close();
-	    } catch (SQLException e) {
+	    } 
+	    catch (SQLException e) {
 	        e.printStackTrace();
 	    }
 	    return docs;

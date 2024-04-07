@@ -69,7 +69,9 @@ public class AppServeurEmpruntRendu implements Runnable{
 					Integer empruntdoc = in.readInt();
 					for(Document doc : docs) {
 						if(empruntdoc == doc.numero()) {
-							doc.reservationPour(abonne);
+							synchronized(docs){
+								doc.empruntPar(abonne);
+							}
 						}
 						else {
 							new IllegalArgumentException("Document inconnue, veuillez donner un document valide.");
@@ -84,7 +86,9 @@ public class AppServeurEmpruntRendu implements Runnable{
 					Integer returndoc = in.readInt();
 					for(Document doc : docs) {
 						if(returndoc == doc.numero()) {
-							doc.retour();
+							synchronized(docs) {
+								doc.retour();
+							}	
 						}
 						else {
 							new IllegalArgumentException("Document inconnue, veuillez donner un document valide.");

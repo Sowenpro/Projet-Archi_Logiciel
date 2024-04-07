@@ -60,8 +60,7 @@ public class AppServeurResevation implements Runnable{
 							abonne = a;
 						}
 						else {
-							phrase_serveur = ("Abonne inconnue, veuillez donner un NumAb valide.");
-							out.writeUTF(phrase_serveur);
+							new IllegalArgumentException("Abonne inconnue, veuillez donner un NumAb valide.");
 						}
 					}
 					phrase_serveur = ("Veuillez saisir le numéro du document: ");
@@ -69,11 +68,12 @@ public class AppServeurResevation implements Runnable{
 					Integer reservationdoc = in.readInt();
 					for(Document doc : docs) {
 						if(reservationdoc == doc.numero()) {
-							doc.reservationPour(abonne);
+							synchronized(docs) {
+								doc.reservationPour(abonne);
+							}	
 						}
 						else {
-							phrase_serveur = ("Document inconnue, veuillez donner un document valide.");
-							out.writeUTF(phrase_serveur);
+							new IllegalArgumentException("Document inconnue, veuillez donner un document valide.");
 						}
 					}
 					String msgconfirmation = numAb +" a réservé le document "+ reservationdoc;

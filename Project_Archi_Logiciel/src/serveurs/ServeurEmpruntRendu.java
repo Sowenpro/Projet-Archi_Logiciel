@@ -51,8 +51,8 @@ public class ServeurEmpruntRendu implements Runnable {
 	            int NumeroDoc = rs.getInt("NumeroDoc");
 	            String TitreDoc = rs.getString("TitreDoc");
 	            String TypeDoc = rs.getString("TypeDoc");
-	            String emprunteur = rs.getString("emprunteur");
-	            String reserveur = rs.getString("reserveur");
+	            int emprunteur = rs.getInt("emprunteur");
+	            int reserveur = rs.getInt("reserveur");
 	            boolean estAdulte = rs.getBoolean("estAdulte");
 	            int nbPages = rs.getInt("nbPages");
 	            docs.add(new DVD(NumeroDoc, TitreDoc, TypeDoc, emprunteur, reserveur, estAdulte));

@@ -22,11 +22,6 @@ public class AppServeurResevation implements Runnable{
 	@Override
 	public void run() {
 		try {
-			// **** Ressources partagées : les documents & les abonnés *****************
-			
-			ArrayList<Document> docs = null; //(ArrayList<Document>)getDocument(conn);
-			ArrayList<Abonne> abos = null; //(ArrayList<Abonne>)getAbonne(conn);
-			// ********************************************************
 			try{
 				// **** Connexion à la base de donnée *****************
 				
@@ -45,6 +40,12 @@ public class AppServeurResevation implements Runnable{
 			catch(SQLException e){
 				e.printStackTrace();
 			}
+			// **** Ressources partagées : les documents & les abonnés *****************
+			
+			ArrayList<Document> docs = null; //(ArrayList<Document>)getDocument(conn);
+			ArrayList<Abonne> abos = null; //(ArrayList<Abonne>)getAbonne(conn);
+			// ********************************************************
+						
 			DataOutputStream out = new DataOutputStream(socket.getOutputStream());
 			DataInputStream in = new DataInputStream(socket.getInputStream());
 			String phrase_serveur;

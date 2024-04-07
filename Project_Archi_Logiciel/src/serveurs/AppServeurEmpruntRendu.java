@@ -22,11 +22,6 @@ public class AppServeurEmpruntRendu implements Runnable{
 	@Override
 	public void run() {
 		try {
-			// **** Ressources partagées : les documents & les abonnés *****************
-			
-			ArrayList<Document> docs = null; //= (ArrayList<Document>) getDocument(conn);
-			ArrayList<Abonne> abos = null; //= (ArrayList<Abonne>) getAbonne(conn);
-			// ********************************************************
 			try{
 				// **** Connexion à la base de donnée *****************
 				
@@ -40,6 +35,13 @@ public class AppServeurEmpruntRendu implements Runnable{
 				// **** Lancement du serveur *****************
 				
 				System.out.println("Serveur lancé sur le port 4000");
+				// ********************************************************
+				
+				
+				// **** Ressources partagées : les documents & les abonnés *****************
+				
+				ArrayList<Document> docs = (ArrayList<Document>) ServeurEmpruntRendu.getDocument(conn);
+				ArrayList<Abonne> abos = (ArrayList<Abonne>) ServeurEmpruntRendu.getAbonne(conn);
 				// ********************************************************
 			}
 			catch(SQLException e ){

@@ -10,6 +10,10 @@ public class DVD extends AbstracDocument {
 		this.estAdulte = estAdule;
 	}
 
+	public DVD(int int1,String nom) {
+		super(nom);
+	}
+
 	public boolean estAdulte() {
 		return estAdulte;
 	}

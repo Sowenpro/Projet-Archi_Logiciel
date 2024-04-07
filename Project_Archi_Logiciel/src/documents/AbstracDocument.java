@@ -15,7 +15,6 @@ public abstract class AbstracDocument implements Document {
         this.reserveur = reserveur;
     }
 
-
 	@Override
     public int numero() {
         return NumeroDoc;

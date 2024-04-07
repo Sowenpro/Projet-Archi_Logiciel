@@ -13,6 +13,7 @@ import abonnes.Abonne;
 import documents.AbstracDocument;
 import documents.DVD;
 import documents.Document;
+import documents.Livre;
 
 public class ServeurEmpruntRendu implements Runnable {
 	public ServerSocket listen_socket;
@@ -52,7 +53,10 @@ public class ServeurEmpruntRendu implements Runnable {
 	            String TypeDoc = rs.getString("TypeDoc");
 	            String emprunteur = rs.getString("emprunteur");
 	            String reserveur = rs.getString("reserveur");
-	            docs.add(new DVD(NumeroDoc, TitreDoc, TypeDoc, emprunteur, reserveur));
+	            boolean estAdulte = rs.getBoolean("estAdulte");
+	            int nbPages = rs.getInt("nbPages");
+	            docs.add(new DVD(NumeroDoc, TitreDoc, TypeDoc, emprunteur, reserveur, estAdulte));
+	            docs.add(new Livre(NumeroDoc, TitreDoc, TypeDoc, emprunteur, reserveur, nbPages));
 	        }
 	        rs.close();
 	        stmt.close();

@@ -40,8 +40,8 @@ public class AppServeurResevation implements Runnable{
 				
 				// **** Ressources partagées : les documents & les abonnés *****************
 				
-				ArrayList<Document> docs = (ArrayList<Document>)getDocument(conn);
-				ArrayList<Abonne> abos = (ArrayList<Abonne>)getAbonne(conn);
+				ArrayList<Document> docs = (ArrayList<Document>)ServeurReservation.getDocument(conn);
+				ArrayList<Abonne> abos = (ArrayList<Abonne>)ServeurReservation.getAbonne(conn);
 				// ********************************************************
 			}
 			catch(SQLException e){

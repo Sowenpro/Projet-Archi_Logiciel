@@ -5,9 +5,9 @@ import abonnes.Abonne;
 public class DVD extends AbstracDocument {
 	private boolean estAdulte;
 
-	public DVD(int NumeroDoc, String TitreDoc, Abonne emprunteur, Abonne reserveur, boolean estAdule) {
+	public DVD(int NumeroDoc, String TitreDoc, Abonne emprunteur, Abonne reserveur, boolean estAdulte) {
 		super(NumeroDoc, TitreDoc, emprunteur, reserveur);
-		this.estAdulte = estAdule;
+		this.estAdulte = estAdulte;
 	}
 
 	public boolean estAdulte() {

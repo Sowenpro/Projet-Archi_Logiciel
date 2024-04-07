@@ -56,10 +56,10 @@ public class ServeurReservation implements Runnable {
 	            int nbPages = rs.getInt("nbPages");
 	            if (TypeDoc.equals("DVD")) {
 		            docs.add(new DVD(NumeroDoc, TitreDoc, TypeDoc, emprunteur, reserveur, estAdulte));
-		            }
-		            else if (TypeDoc.equals("Livre")) {
+		        }
+		        else if (TypeDoc.equals("Livre")) {
 		            docs.add(new Livre(NumeroDoc, TitreDoc, TypeDoc, emprunteur, reserveur, nbPages));
-		            }
+		        }
 	        }
 	        rs.close();
 	        stmt.close();

@@ -42,7 +42,8 @@ public class AppServeurResevation implements Runnable{
 				
 				ArrayList<Document> docs = (ArrayList<Document>)ServeurReservation.getDocument(conn);
 				ArrayList<Abonne> abos = (ArrayList<Abonne>)ServeurReservation.getAbonne(conn);
-				// ********************************************************			
+				// ********************************************************	
+				
 				DataOutputStream out = new DataOutputStream(socket.getOutputStream());
 				DataInputStream in = new DataInputStream(socket.getInputStream());
 				String phrase_serveur;

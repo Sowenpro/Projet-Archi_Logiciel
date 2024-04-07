@@ -56,10 +56,10 @@ public class ServeurEmpruntRendu implements Runnable {
 	            boolean estAdulte = rs.getBoolean("estAdulte");
 	            int nbPages = rs.getInt("nbPages"); 
 	            if (TypeDoc.equals("DVD")) {
-	            docs.add(new DVD(NumeroDoc, TitreDoc, TypeDoc, emprunteur, reserveur, estAdulte));
+	            	docs.add(new DVD(NumeroDoc, TitreDoc, TypeDoc, emprunteur, reserveur, estAdulte));
 	            }
 	            else if (TypeDoc.equals("Livre")) {
-	            docs.add(new Livre(NumeroDoc, TitreDoc, TypeDoc, emprunteur, reserveur, nbPages));
+	            	docs.add(new Livre(NumeroDoc, TitreDoc, TypeDoc, emprunteur, reserveur, nbPages));
 	            }
 	        }
 	        rs.close();

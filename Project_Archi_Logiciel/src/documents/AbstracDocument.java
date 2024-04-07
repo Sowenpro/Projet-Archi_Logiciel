@@ -5,14 +5,12 @@ import abonnes.Abonne;
 public abstract class AbstracDocument implements Document {
     protected int NumeroDoc;
     protected String TitreDoc;
-    protected String TypeDoc;
     protected Abonne emprunteur;
     protected Abonne reserveur;
 
-    public AbstracDocument(int NumeroDoc, String TitreDoc, String TypeDoc, Abonne emprunteur, Abonne reserveur) {
+    public AbstracDocument(int NumeroDoc, String TitreDoc, Abonne emprunteur, Abonne reserveur) {
     	this.NumeroDoc = NumeroDoc;
         this.TitreDoc = TitreDoc;
-        this.TypeDoc = TypeDoc;
         this.emprunteur = emprunteur;
         this.reserveur = reserveur;
     }

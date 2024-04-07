@@ -24,89 +24,90 @@ public class AppServeurEmpruntRendu implements Runnable{
 		try {
 			try{
 				// **** Connexion à la base de donnée *****************
-				
+					
 				Connection conn = DriverManager.getConnection(DB_URL, USER, PASS);
 				conn = DriverManager.getConnection(DB_URL, USER, PASS);
 				conn.setAutoCommit(false);
 				System.out.println("On est connecté au serveur sur la base Mediatheque");
 				// ********************************************************
-				
-				
+					
+					
 				// **** Lancement du serveur *****************
-				
+					
 				System.out.println("Serveur lancé sur le port 4000");
 				// ********************************************************
-				
-				
+					
+					
 				// **** Ressources partagées : les documents & les abonnés *****************
-				
+					
 				ArrayList<Document> docs = (ArrayList<Document>) ServeurEmpruntRendu.getDocument(conn);
 				ArrayList<Abonne> abos = (ArrayList<Abonne>) ServeurEmpruntRendu.getAbonne(conn);
 				// ********************************************************
-			}
-			catch(SQLException e ){
-				e.printStackTrace();
-			}
-			DataInputStream in = new DataInputStream(socket.getInputStream());
-			DataOutputStream out = new DataOutputStream(socket.getOutputStream());
-			String phrase_serveur;
-			String phrase_serveur_err;
-			phrase_serveur = ("Voulez-vous emprunter, retourner ou quitter ? (e/r/q)");
-			out.writeUTF(phrase_serveur);
-			String reponse = in.readUTF();
-			if (reponse.compareTo("e") == 0) {
-				phrase_serveur = ("Vous avez choisi d'emprunter\nVeuillez saisir votre numero d'abonné: ");
+				
+				DataInputStream in = new DataInputStream(socket.getInputStream());
+				DataOutputStream out = new DataOutputStream(socket.getOutputStream());
+				String phrase_serveur;
+				String phrase_serveur_err;
+				phrase_serveur = ("Voulez-vous emprunter, retourner ou quitter ? (e/r/q)");
 				out.writeUTF(phrase_serveur);
-				Integer numAb = in.readInt();
-				Abonne abonne = null;
-				for(Abonne a : abos) {
-					if(numAb == a.getNum()) {
-						abonne = a;
+				String reponse = in.readUTF();
+				if (reponse.compareTo("e") == 0) {
+					phrase_serveur = ("Vous avez choisi d'emprunter\nVeuillez saisir votre numero d'abonné: ");
+					out.writeUTF(phrase_serveur);
+					Integer numAb = in.readInt();
+					Abonne abonne = null;
+					for(Abonne a : abos) {
+						if(numAb == a.getNum()) {
+							abonne = a;
+						}
 					}
-				}
-				phrase_serveur = ("Veuillez saisir le numéro du document: ");
-				out.writeUTF(phrase_serveur);
-				Integer empruntdoc = in.readInt();
-				for(Document doc : docs) {
-					if(empruntdoc == doc.numero()) {
-						doc.reservationPour(abonne);
+					phrase_serveur = ("Veuillez saisir le numéro du document: ");
+					out.writeUTF(phrase_serveur);
+					Integer empruntdoc = in.readInt();
+					for(Document doc : docs) {
+						if(empruntdoc == doc.numero()) {
+							doc.reservationPour(abonne);
+						}
 					}
+					String msgconfirmation = numAb +" a emprunté le document "+ empruntdoc;
+					out.writeUTF(msgconfirmation);
 				}
-				String msgconfirmation = numAb +" a emprunté le document "+ empruntdoc;
-				out.writeUTF(msgconfirmation);
-			}
-			else if (reponse.compareTo("r") == 0) {
-				phrase_serveur = ("Vous avez choisi de retourner\nVeuillez saisir le numéro du document: ");
-				out.writeUTF(phrase_serveur);
-				Integer returndoc = in.readInt();
-				for(Document doc : docs) {
-					if(returndoc == doc.numero()) {
-						doc.retour();
+				else if (reponse.compareTo("r") == 0) {
+					phrase_serveur = ("Vous avez choisi de retourner\nVeuillez saisir le numéro du document: ");
+					out.writeUTF(phrase_serveur);
+					Integer returndoc = in.readInt();
+					for(Document doc : docs) {
+						if(returndoc == doc.numero()) {
+							doc.retour();
+						}
 					}
+					String msgconfirmation = "Vous avez rendu le document "+ returndoc;
+					out.writeUTF(msgconfirmation);
 				}
-				String msgconfirmation = "Vous avez rendu le document "+ returndoc;
-				out.writeUTF(msgconfirmation);
-			}
-			else if (reponse.compareTo("q") == 0) {
-				phrase_serveur = ("Voulez-vous vraiment quitter l'application ? (y/n)");
-				out.writeUTF(phrase_serveur);
-				String rep = in.readUTF();
-				if (rep.compareTo("y") == 0) {
-				socket.close();
-				}
-				else if (rep.compareTo("n") == 0) {
+				else if (reponse.compareTo("q") == 0) {
+					phrase_serveur = ("Voulez-vous vraiment quitter l'application ? (y/n)");
+					out.writeUTF(phrase_serveur);
+					String rep = in.readUTF();
+					if (rep.compareTo("y") == 0) {
+					socket.close();
+					}
+					else if (rep.compareTo("n") == 0) {
+					}
+					else {
+						phrase_serveur_err = ("Commande inconnue, veuillez réessayer. (y/n)");
+						out.writeUTF(phrase_serveur_err);
+					}
 				}
 				else {
-					phrase_serveur_err = ("Commande inconnue, veuillez réessayer. (y/n)");
+					phrase_serveur_err = ("Commande inconnue, veuillez réessayer.(e/r/q)");
 					out.writeUTF(phrase_serveur_err);
-				}
+				}	
 			}
-			else {
-				phrase_serveur_err = ("Commande inconnue, veuillez réessayer.(e/r/q)");
-				out.writeUTF(phrase_serveur_err);
-			}	
+			catch(IOException e){
+				e.printStackTrace();
+			}
 		}
-		catch(IOException e){
+		catch(SQLException e ){
 			e.printStackTrace();
 		}
 	}

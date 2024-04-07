@@ -17,7 +17,7 @@ public class Abonne {
         return NumeroAb;
     }
 
-    public String toString() {
+    public String getNom() {
         return NomAb;
     }
 
